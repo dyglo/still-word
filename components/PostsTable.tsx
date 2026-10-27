@@ -9,7 +9,7 @@ export default function PostsTable({ rows }: { rows: Row[] }) {
         </thead>
         <tbody>
           {rows.map((r) => {
-            const pct = Math.round((r.reads / r.views) * 100);
+            const pct = r.views ? Math.min(100, Math.round((r.reads / r.views) * 100)) : 0;
             return (
               <tr key={r.title}>
                 <td><b>{r.title}</b></td>

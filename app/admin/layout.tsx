@@ -1,11 +1,13 @@
 import AdminSidebar from "@/components/AdminSidebar";
+import { headers } from 'next/headers';
+import { requireAdmin } from '@/lib/auth';
 
-// TODO(auth): guard this layout (middleware or server session check).
-// Public admin routes later: /admin/login and /admin/sign-up; everything else requires a session.
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const isPublic = (await headers()).get('x-stillword-admin-public') === '1';
+  if (!isPublic) await requireAdmin();
   return (
     <div className="adm">
-      <AdminSidebar />
+      <AdminSidebar authenticated={!isPublic} />
       <main className="adm-main">{children}</main>
     </div>
   );

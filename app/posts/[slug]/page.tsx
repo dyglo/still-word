@@ -2,14 +2,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import PostBody from "@/components/PostBody";
-import { getPost, posts } from "@/lib/posts";
+import { publishedPost } from "@/lib/data/posts";
+import { PostAnalytics } from '@/components/Analytics';
 
-export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
-}
-
-export default function PostPage({ params }: { params: { slug: string } }) {
-  const post = getPost(params.slug);
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await publishedPost(slug);
   if (!post) notFound();
 
   return (
@@ -30,7 +28,8 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         </div>
 
         <div>
-          <PostBody blocks={post.blocks} />
+          <PostBody html={post.content_html} />
+          <PostAnalytics postId={post.id} />
           <Link href="/" className="back end">Back to all posts</Link>
         </div>
       </main>

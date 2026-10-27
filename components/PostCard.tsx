@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Post } from "@/lib/posts";
+import type { Post } from "@/lib/data/posts";
 
 export default function PostCard({ post }: { post: Post }) {
   return (
@@ -11,7 +11,7 @@ export default function PostCard({ post }: { post: Post }) {
         {post.readMinutes} min read
         <b>{post.date}</b>
       </span>
-      <span className="im" style={{ background: post.coverColor }} role="img" aria-label={`Cover for ${post.title}`} />
+      <span className="im" style={{ background: post.cover_url ? `url("${post.cover_url}") center / cover` : 'var(--line)' }} role="img" aria-label={`Cover for ${post.title}`} />
     </Link>
   );
 }

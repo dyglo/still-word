@@ -2,15 +2,16 @@ import Link from "next/link";
 import StatCard from "@/components/StatCard";
 import BarChart from "@/components/BarChart";
 import PostsTable from "@/components/PostsTable";
-import { drafts, stats, topPosts, visitorsPerDay } from "@/lib/analytics";
+import { dashboardData } from "@/lib/data/analytics";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const { drafts, stats, topPosts, visitorsPerDay } = await dashboardData();
   return (
     <>
       <div className="adm-top">
         <div>
           <h1>Dashboard</h1>
-          <p className="muted">Last 14 days · mock data</p>
+          <p className="muted">Last 14 days</p>
         </div>
         <Link href="/admin/editor" className="btn">New post</Link>
       </div>
@@ -25,14 +26,15 @@ export default function Dashboard() {
         <div className="card grow1">
           <h2>Drafts</h2>
           {drafts.map((d) => (
-            <Link key={d.title + d.edited} href="/admin/editor" className="draft"><b>{d.title}</b><span>{d.edited}</span></Link>
+            <Link key={d.id} href={`/admin/editor/${d.id}`} className="draft"><b>{d.title}</b><span>{d.edited}</span></Link>
           ))}
+          {!drafts.length && <p className="muted">No drafts yet.</p>}
         </div>
       </section>
 
       <section className="card">
         <h2>Most read posts</h2>
-        <PostsTable rows={topPosts} />
+        {topPosts.length ? <PostsTable rows={topPosts} /> : <p className="muted">No data yet.</p>}
       </section>
     </>
   );

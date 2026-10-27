@@ -2,23 +2,48 @@
   "name": "stillword",
   "version": "0.1.0",
   "private": true,
-  "scripts": { "dev": "next dev", "build": "next build", "start": "next start" },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "test:integration": "node --env-file=.env.local tests/integration.mjs"
+  },
   "dependencies": {
-    "next": "^14.2.15",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "@tiptap/react": "^2.10.3",
-    "@tiptap/pm": "^2.10.3",
-    "@tiptap/starter-kit": "^2.10.3",
-    "@tiptap/extension-underline": "^2.10.3",
-    "@tiptap/extension-image": "^2.10.3",
-    "@tiptap/extension-text-align": "^2.10.3",
-    "@tiptap/extension-placeholder": "^2.10.3"
+    "@floating-ui/dom": "1.8.0",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.118.0",
+    "@tiptap/core": "3.32.0",
+    "@tiptap/extension-image": "3.32.0",
+    "@tiptap/extension-placeholder": "3.32.0",
+    "@tiptap/extension-text-align": "3.32.0",
+    "@tiptap/extension-underline": "3.32.0",
+    "@tiptap/pm": "3.32.0",
+    "@tiptap/react": "3.32.0",
+    "@tiptap/starter-kit": "3.32.0",
+    "domhandler": "5.0.3",
+    "htmlparser2": "10.0.0",
+    "next": "16.4.3",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "sanitize-html": "2.18.1",
+    "server-only": "0.0.1"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "typescript": "^5"
+    "@playwright/test": "1.64.1",
+    "@types/node": "^24",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/sanitize-html": "2.16.2",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.3",
+    "typescript": "^5",
+    "vitest": "5.0.5"
+  },
+  "overrides": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0"
   }
 }

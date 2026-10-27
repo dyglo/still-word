@@ -119,3 +119,6 @@ td{padding:14px 0;border-top:1px solid #eee}
   .author{margin-top:32px}
   .adm-main{padding:24px}
 }
+
+/* auth */
+.auth-signout{width:100%;border:0;background:transparent;color:inherit;font-size:inherit;text-align:left;cursor:pointer}
